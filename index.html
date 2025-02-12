@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burgers Local</title>
+    <style>
+        body {
+            font-family: Comic Sans MS, cursive, sans-serif;
+            background-color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        nav {
+            background-color: #555;
+            padding: 15px;
+            text-align: center;
+        }
+        nav a {
+            color: yellow;
+            margin: 15px;
+            text-decoration: underline;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        nav a:hover {
+            color: red;
+        }
+        .content {
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 3px dashed #000;
+        }
+        .product, .package {
+            border: 2px dotted green;
+            padding: 15px;
+            margin: 15px 0;
+            background-color: #fafafa;
+            box-shadow: 5px 5px 10px gray;
+        }
+        img {
+            width: 90%;
+            max-width: 250px;
+            border: 5px solid orange;
+        }
+        iframe {
+            width: 90%;
+            height: 250px;
+            border: 5px solid purple;
+        }
+        h1, h2, h3 {
+            text-align: center;
+            color: darkblue;
+            text-transform: uppercase;
+        }
+        p {
+            text-align: justify;
+        }
+        .login-form, .register-form, .payment-form {
+            display: none;
+            border: 1px solid #000;
+            padding: 10px;
+            background-color: white;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            margin: 10px;
+            text-align: center;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a onclick="mostrarSeccion('inicio')">Home</a>
+        <a onclick="mostrarSeccion('paquetes')">Packs</a>
+        <a onclick="mostrarSeccion('contacto')">Info</a>
+        <a onclick="mostrarFormularioLogin()">Login</a>
+    </nav>
+
+    <div class="content" id="inicio">
+        <h1>Our menu</h1>
+        <p>The tastiest Burgers in town</p>
+        <div class="product">
+            <h3>Classic Burger</h3>
+            <img src="img/hamburguesa clasica.jpg" alt="Classic Burger">
+            <p>Bread, meat, lettuce, tomato, and cheese. A classic option for lovers of traditional flavors.</p>
+            <a href="javascript:void(0);" onclick="handleChoice()">To choose</a>
+        </div>
+        <div class="product">
+            <h3>BBQ Burger</h3>
+            <img src="img/HamburguesaBBQ.jpeg" alt="BBQ Burger">
+            <p>Juicy meat, crispy bacon, caramelized onions, and delicious BBQ sauce.</p>
+            <a href="javascript:void(0);" onclick="handleChoice()">To choose</a>
+        </div>
+        <div class="product">
+            <h3>Vegan Burger</h3>
+            <img src="img/230845.avif" alt="Vegan Burger">
+            <p>Whole grain bread, chickpea burger, fresh lettuce, tomato, and creamy avocado.</p>
+            <a href="javascript:void(0);" onclick="handleChoice()">To choose</a>
+        </div>
+    </div>
+
+    <div class="content" id="paquetes" style="display:none;">
+        <h2>Packs</h2>
+        <div class="package">
+            <h3>Family Pack</h3>
+            <img src="img/Paquetefamily.jpeg" alt="Family Pack">
+            <p>2 Burgers, chicken sandwich, fries, and nuggets.</p>
+            <a href="javascript:void(0);" onclick="handleChoice()">To choose</a>
+        </div>
+        <div class="package">
+            <h3>Kids Meal</h3>
+            <img src="img/hamburkid.png" alt="Kids Meal">
+            <p>Mini Burger, fries, and juice. Includes a small gift.</p>
+            <a href="javascript:void(0);" onclick="handleChoice()">To choose</a>
+        </div>
+        <div class="package">
+            <h3>Single Pack</h3>
+            <img src="img/hamindividual.png" alt="Single Pack">
+            <p>Burger of your choice, soft drink, and fries.</p>
+            <a href="javascript:void(0);" onclick="handleChoice()">To choose</a>
+        </div>
+    </div>
+
+    <div class="content" id="contacto" style="display:none;">
+        <h2>About us</h2>
+        <p>Phone: +79011088000</p>
+        <p>Address: Ulitsa Mayakovskogo, 21, Omsk, Russia, 644010</p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2290.1223938371895!2d73.3843983760625!3d54.970952751939876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x43aafdfcc57a884b%3A0x1633f32c64ab16ee!2z0JHRg9GA0LPQtdGA0L3QsNGPINCc0K_QodCeUk9PQg!5e0!3m2!1ses-419!2smx!4v1738640634394!5m2!1ses-419!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="ocultarFormulario()">
+        <div class="login-form" onclick="event.stopPropagation();">
+            <h2>Login</h2>
+            <label>Username: <input type="text" id="username"></label><br><br>
+            <label>Password: <input type="password" id="password"></label><br><br>
+            <button onclick="login()">Login</button>
+            <p>¿No tienes cuenta? <a href="javascript:void(0);" onclick="mostrarFormularioRegistro()">Regístrate aquí</a></p>
+        </div>
+
+        <div class="register-form" onclick="event.stopPropagation();">
+            <h2>Register</h2>
+            <label>Username: <input type="text" id="newUsername"></label><br><br>
+            <label>Password: <input type="password" id="newPassword"></label><br><br>
+            <button onclick="register()">Register</button>
+        </div>
+
+        <div class="payment-form" onclick="event.stopPropagation();">
+            <h2>Payment</h2>
+            <label>Card Number: <input type="text" placeholder="1234 5678 9101 1121"></label><br><br>
+            <label>Expiration Date: <input type="text" placeholder="MM/YY"></label><br><br>
+            <label>CVV: <input type="text" placeholder="123"></label><br><br>
+            <button onclick="pay()">Pay</button>
+        </div>
+    </div>
+
+    <script>
+        let usuarioLogueado = false;
+
+        function mostrarSeccion(seccion) {
+            document.querySelectorAll('.content').forEach(div => div.style.display = 'none');
+            document.getElementById(seccion).style.display = 'block';
+        }
+
+        function mostrarFormularioLogin() {
+            document.querySelector('.login-form').style.display = 'block';
+            document.getElementById('overlay').style.display = 'flex';
+        }
+
+        function mostrarFormularioRegistro() {
+            document.querySelector('.login-form').style.display = 'none';
+            document.querySelector('.register-form').style.display = 'block';
+        }
+
+        function handleChoice() {
+            if (usuarioLogueado) {
+                document.querySelector('.payment-form').style.display = 'block';
+            } else {
+                mostrarFormularioLogin();
+            }
+            document.getElementById('overlay').style.display = 'flex';
+        }
+
+        function ocultarFormulario() {
+            document.querySelectorAll('.login-form, .register-form, .payment-form').forEach(form => form.style.display = 'none');
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        function login() {
+            usuarioLogueado = true;
+            ocultarFormulario();
+            alert('Logged in successfully!');
+        }
+
+        function register() {
+            alert('Registration successful! You can now log in.');
+            mostrarFormularioLogin();
+        }
+
+        function pay() {
+            alert('Payment successful!');
+            ocultarFormulario();
+        }
+    </script>
+</body>
+</html>
+
